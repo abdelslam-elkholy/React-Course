@@ -45,11 +45,42 @@ const pizzaData = [
   },
 ];
 function App() {
-  return <h1>Welcome React</h1>;
+  return (
+    <div>
+      <Header />
+      <Menue />
+      <Footer />
+    </div>
+  );
 }
+function Header() {
+  return <h1>Welcome to our React Header</h1>;
+}
+function Menue() {
+  return (
+    <div>
+      <h1>Our Menue</h1>
+      <Pizza />
+      <Pizza />
+      <Pizza />
+    </div>
+  );
+}
+function Footer() {
+  return (
+    <footer>{new Date().toLocaleTimeString()} We Are Currently Open</footer>
+  );
 
+  // return React.createElement("footer", null, "we are currently open");
+}
 function Pizza() {
-  return <div></div>;
+  return (
+    <div>
+      <img src="pizzas/spinaci.jpg" alt="ll" />
+      <h2>Focaccia</h2>
+      <p>Tomato, mozarella, ham, aragula, and burrata cheese</p>
+    </div>
+  );
 }
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 root.render(
