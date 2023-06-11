@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
+
 const pizzaData = [
   {
     name: "Focaccia",
@@ -46,7 +48,7 @@ const pizzaData = [
 ];
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menue />
       <Footer />
@@ -54,31 +56,53 @@ function App() {
   );
 }
 function Header() {
-  return <h1>Welcome to our React Header</h1>;
+  return (
+    <header className="header">
+      <h1>Welcome to our React Header</h1>;
+    </header>
+  );
 }
 function Menue() {
   return (
-    <div>
+    <main className="menue">
       <h1>Our Menue</h1>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </div>
+      <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        price={12}
+        photoName="pizzas/spinaci.jpg"
+      />
+      <Pizza
+        name="Pizza Salamino"
+        ingredients="Tomato, mozarella, and pepperoni"
+        price={15}
+        photoName="pizzas/salamino.jpg"
+      />
+      <Pizza
+        name="Pizza Prosciutto"
+        ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
+        price={18}
+        photoName="pizzas/prosciutto.jpg"
+      />
+    </main>
   );
 }
 function Footer() {
   return (
-    <footer>{new Date().toLocaleTimeString()} We Are Currently Open</footer>
+    <footer className="footer">
+      {new Date().toLocaleTimeString()} We Are Currently Open
+    </footer>
   );
 
   // return React.createElement("footer", null, "we are currently open");
 }
-function Pizza() {
+function Pizza(props) {
   return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="ll" />
-      <h2>Focaccia</h2>
-      <p>Tomato, mozarella, ham, aragula, and burrata cheese</p>
+    <div className="pizza">
+      <img src={props.photoName} alt={props.name} />
+      <h2>{props.name}</h2>
+      <p>{props.ingredients}</p>
+      <span>{props.price}</span>
     </div>
   );
 }
