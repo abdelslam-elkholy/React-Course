@@ -58,39 +58,44 @@ function App() {
 function Header() {
   return (
     <header className="header">
-      <h1>Welcome to our React Header</h1>;
+      <h1>Welcome to our React Header</h1>
     </header>
   );
 }
 function Menue() {
+  const pizzas = pizzaData;
+  const piizzasLen = pizzas.length;
   return (
     <main className="menue">
-      <h1>Our Menue</h1>
-      <Pizza
-        name="Pizza Spinaci"
-        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-        price={12}
-        photoName="pizzas/spinaci.jpg"
-      />
-      <Pizza
-        name="Pizza Salamino"
-        ingredients="Tomato, mozarella, and pepperoni"
-        price={15}
-        photoName="pizzas/salamino.jpg"
-      />
-      <Pizza
-        name="Pizza Prosciutto"
-        ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
-        price={18}
-        photoName="pizzas/prosciutto.jpg"
-      />
+      <h2>Our Menue</h2>
+
+      {piizzasLen > 0 && (
+        <ul className="pizzas">
+          {pizzaData.map((ele) => (
+            <Pizza pizzaobj={ele} key={ele.name} />
+          ))}
+        </ul>
+      )}
     </main>
   );
 }
 function Footer() {
+  const openHours = 8;
+  const closeHours = 22;
+  const hour = new Date().getHours();
+  const isOpen = hour >= openHours && hour < closeHours;
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()} We Are Currently Open
+      {isOpen ? (
+        <div className="order">
+          <p>We are currently open until {closeHours}:00</p>
+          <button className="btn">Order Now</button>
+        </div>
+      ) : (
+        <p>
+          we are close come again between {openHours}:00 and {closeHours}:00
+        </p>
+      )}
     </footer>
   );
 
@@ -98,12 +103,14 @@ function Footer() {
 }
 function Pizza(props) {
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
-      <h2>{props.name}</h2>
-      <p>{props.ingredients}</p>
-      <span>{props.price}</span>
-    </div>
+    <li className="pizza">
+      <img src={props.pizzaobj.photoName} alt={props.pizzaobj.name} />
+      <div>
+        <h2>{props.pizzaobj.name}</h2>
+        <p>{props.pizzaobj.ingredients}</p>
+        <span>{props.pizzaobj.price}</span>
+      </div>
+    </li>
   );
 }
 const root = ReactDOM.createRoot(document.querySelector("#root"));
