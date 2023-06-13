@@ -101,14 +101,14 @@ function Footer() {
 
   // return React.createElement("footer", null, "we are currently open");
 }
-function Pizza(props) {
+function Pizza({ pizzaobj }) {
   return (
     <li className="pizza">
-      <img src={props.pizzaobj.photoName} alt={props.pizzaobj.name} />
+      <img src={pizzaobj.photoName} alt={pizzaobj.name} />
       <div>
-        <h2>{props.pizzaobj.name}</h2>
-        <p>{props.pizzaobj.ingredients}</p>
-        <span>{props.pizzaobj.price}</span>
+        <h2>{pizzaobj.name}</h2>
+        <p>{pizzaobj.ingredients}</p>
+        <span>{pizzaobj.price}</span>
       </div>
     </li>
   );
