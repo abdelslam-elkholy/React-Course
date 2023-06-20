@@ -40,6 +40,7 @@ function Item({ item }) {
       <span>
         {item.quantity} {item.description}
       </span>
+      <button>&time;</button>
     </li>
   );
 }
