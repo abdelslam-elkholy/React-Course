@@ -23,7 +23,13 @@ function Form() {
   return (
     <form className="add-form">
       <h3>what do you need for your form</h3>
-      <select></select>
+      <select>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option key={num} value={num}>
+            {num}
+          </option>
+        ))}
+      </select>
       <input type="text" placeHolder="item..."></input>
       <button>Add</button>
     </form>
@@ -43,7 +49,7 @@ function PackingList() {
 }
 function Item({ item }) {
   return (
-    <li>
+    <li key={item.id}>
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
