@@ -23,6 +23,9 @@ function Form() {
   return (
     <form className="add-form">
       <h3>what do you need for your form</h3>
+      <select></select>
+      <input type="text" placeHolder="item..."></input>
+      <button>Add</button>
     </form>
   );
 }
