@@ -7,7 +7,7 @@ const messages = [
 ];
 
 export default function App() {
-  const { steps, setSteps } = useState(1);
+  const [steps, setSteps] = useState(1);
 
   const handelNext = () => {
     steps < 3 && setSteps(steps + 1);
