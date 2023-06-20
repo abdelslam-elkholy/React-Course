@@ -20,7 +20,11 @@ function Logo() {
 }
 
 function Form() {
-  return <div className="add-form"> what do you need for your form</div>;
+  return (
+    <form className="add-form">
+      <h3>what do you need for your form</h3>
+    </form>
+  );
 }
 
 function PackingList() {
