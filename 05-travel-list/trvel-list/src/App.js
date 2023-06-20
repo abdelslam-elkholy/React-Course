@@ -3,6 +3,8 @@ export default function App() {
     <div className="app">
       <Logo />
       <Form />
+      <PackingList />
+      <Stats />
     </div>
   );
 }
@@ -15,7 +17,7 @@ function Form() {
   return <div className="add-form"> what do you need for your form</div>;
 }
 
-function packingList() {
+function PackingList() {
   return (
     <div className="list">
       <h3>what do you need for your form</h3>
@@ -23,9 +25,9 @@ function packingList() {
   );
 }
 
-function stats() {
+function Stats() {
   return (
-    <footer>
+    <footer className="stats">
       <em>You Have x items</em>
     </footer>
   );
