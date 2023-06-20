@@ -16,12 +16,12 @@ export default function App() {
   };
 
   const decrementCount = function () {
-    count >= 0 && setCount((c) => (c - steps > 0 ? c - steps : 1));
+    setCount((c) => (c - steps > 0 ? c - steps : 0));
   };
 
   const getDays = function () {
     const date = new Date();
-    date.setDate(date.getDate() + 5);
+    date.setDate(date.getDate() + count);
     return date.toDateString();
   };
   return (
@@ -63,7 +63,9 @@ export default function App() {
           +
         </button>
       </div>
-      <p>{`${count} days`}</p>
+      <p>
+        {count > 0 && `${count} days from now is: `} {getDays()}
+      </p>
     </div>
   );
 }
