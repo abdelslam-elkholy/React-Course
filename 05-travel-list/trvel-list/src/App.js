@@ -16,7 +16,7 @@ export default function App() {
 }
 
 function Logo() {
-  return <h1>Far Away</h1>;
+  return <h1>🌴️ Far Away 👜️</h1>;
 }
 
 function Form() {
@@ -53,7 +53,7 @@ function Item({ item }) {
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
-      <button>&time;</button>
+      <button> ❌️ </button>
     </li>
   );
 }
