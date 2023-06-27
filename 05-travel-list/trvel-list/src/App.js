@@ -32,7 +32,7 @@ function Form() {
       <select
         value={quant}
         onChange={(e) => {
-          setquant(e.target.selectedIndex);
+          setquant(e.target.selectedIndex + 1);
         }}
       >
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
