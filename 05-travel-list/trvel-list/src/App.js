@@ -8,11 +8,13 @@ const initialItems = [
 export default function App() {
   const [items, setItems] = useState([]);
   const addNewItem = (item) => setItems([...items, item]);
+  const deleteItem = (id) =>
+    setItems((items) => items.filter((item) => item.id !== id));
   return (
     <div className="app">
       <Logo />
       <Form addNewItem={addNewItem} />
-      <PackingList items={items} />
+      <PackingList items={items} deleteItem={deleteItem} />
       <Stats />
     </div>
   );
@@ -64,24 +66,24 @@ function Form({ addNewItem }) {
   );
 }
 
-function PackingList({ items }) {
+function PackingList({ items, deleteItem }) {
   return (
     <div className="list">
       <ul>
         {items.map((ele) => (
-          <Item item={ele} key={ele.id} />
+          <Item item={ele} key={ele.id} deleteItem={deleteItem} />
         ))}
       </ul>
     </div>
   );
 }
-function Item({ item }) {
+function Item({ item, deleteItem }) {
   return (
     <li>
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
-      <button> ❌️ </button>
+      <button onClick={() => deleteItem(item.id)}> ❌️ </button>
     </li>
   );
 }
