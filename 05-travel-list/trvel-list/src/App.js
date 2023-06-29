@@ -4,11 +4,21 @@ export default function App() {
   const [items, setItems] = useState([]);
   const addNewItem = (item) => setItems([...items, item]);
   const deleteItem = (id) => setItems(items.filter((item) => item.id !== id));
+  const changeCkeck = (id) =>
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
   return (
     <div className="app">
       <Logo />
       <Form addNewItem={addNewItem} />
-      <PackingList items={items} deleteItem={deleteItem} />
+      <PackingList
+        items={items}
+        deleteItem={deleteItem}
+        changeCkeck={changeCkeck}
+      />
       <Stats />
     </div>
   );
@@ -60,12 +70,17 @@ function Form({ addNewItem }) {
   );
 }
 
-function PackingList({ items, deleteItem }) {
+function PackingList({ items, deleteItem, changeCkeck }) {
   return (
     <div className="list">
       <ul>
         {items.map((ele) => (
-          <Item item={ele} key={ele.id} deleteItem={deleteItem} />
+          <Item
+            item={ele}
+            key={ele.id}
+            deleteItem={deleteItem}
+            changeCkeck={changeCkeck}
+          />
         ))}
       </ul>
     </div>
