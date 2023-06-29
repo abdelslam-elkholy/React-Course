@@ -4,12 +4,12 @@ export default function App() {
   const [steps, setSteps] = useState(1);
   const [count, setCount] = useState(0);
 
-  const incrementSteps = function () {
-    setSteps((step) => step + 1);
-  };
-  const decrementSteps = function () {
-    steps > 1 && setSteps((step) => step - 1);
-  };
+  //   const incrementSteps = function () {
+  //     setSteps((step) => step + 1);
+  //   };
+  //   const decrementSteps = function () {
+  //     steps > 1 && setSteps((step) => step - 1);
+  //   };
 
   const incrementCount = function () {
     setCount((c) => c + steps);
@@ -33,7 +33,7 @@ export default function App() {
         alignItems: "center",
       }}
     >
-      <div>
+      {/* <div>
         <button
           style={{ padding: ".2rem", fontSize: "1.5rem", margin: ".5rem" }}
           onClick={decrementSteps}
@@ -47,7 +47,15 @@ export default function App() {
         >
           +
         </button>
-      </div>
+    </div> */}
+
+      <input
+        type="range"
+        min={0}
+        max={10}
+        value={steps}
+        onChange={(e) => setSteps(+e.target.value)}
+      />
       <div>
         <button
           style={{ padding: ".2rem", fontSize: "1.5rem", margin: ".5rem" }}
@@ -55,7 +63,12 @@ export default function App() {
         >
           -
         </button>
-        {count}
+        <input
+          type="number"
+          min={0}
+          value={count}
+          onChange={(e) => setCount(+e.target.value)}
+        />
         <button
           style={{ padding: ".2rem", fontSize: "1.5rem", margin: ".5rem" }}
           onClick={incrementCount}
@@ -63,9 +76,21 @@ export default function App() {
           +
         </button>
       </div>
+
       <p>
         {count > 0 && `${count} days from now is: `} {getDays()}
       </p>
+
+      {(count !== 0 || steps !== 1) && (
+        <button
+          onClick={() => {
+            setCount(0);
+            setSteps(1);
+          }}
+        >
+          Reset
+        </button>
+      )}
     </div>
   );
 }
