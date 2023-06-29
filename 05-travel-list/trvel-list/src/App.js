@@ -25,6 +25,12 @@ function Form() {
   const [quant, setquant] = useState(1);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!desc) return;
+
+    const newItem = { desc, quant, packed: false, id: Date.now() };
+    console.log(newItem);
+    setDesc("");
+    setquant(1);
   };
   return (
     <form className="add-form" onSubmit={handleSubmit}>
@@ -43,7 +49,7 @@ function Form() {
       </select>
       <input
         type="text"
-        placeHolder="item..."
+        placeholder="item..."
         value={desc}
         onChange={(e) => {
           setDesc(e.target.value);
