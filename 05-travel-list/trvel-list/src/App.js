@@ -65,7 +65,7 @@ function PackingList() {
     <div className="list">
       <ul>
         {initialItems.map((ele) => (
-          <Item item={ele} />
+          <Item item={ele} key={ele.id} />
         ))}
       </ul>
     </div>
@@ -73,7 +73,7 @@ function PackingList() {
 }
 function Item({ item }) {
   return (
-    <li key={item.id}>
+    <li>
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
