@@ -6,11 +6,13 @@ const initialItems = [
 ];
 
 export default function App() {
+  const [items, setItems] = useState([]);
+  const addNewItem = (item) => setItems([...items, item]);
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackingList />
+      <Form addNewItem={addNewItem} />
+      <PackingList items={items} />
       <Stats />
     </div>
   );
@@ -20,25 +22,27 @@ function Logo() {
   return <h1>🌴️ Far Away 👜️</h1>;
 }
 
-function Form() {
-  const [desc, setDesc] = useState("");
-  const [quant, setquant] = useState(1);
+function Form({ addNewItem }) {
+  const [description, setDesciption] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!desc) return;
+    if (!description) return;
 
-    const newItem = { desc, quant, packed: false, id: Date.now() };
+    const newItem = { description, quantity, packed: false, id: Date.now() };
     console.log(newItem);
-    setDesc("");
-    setquant(1);
+    addNewItem(newItem);
+    setDesciption("");
+    setQuantity(1);
   };
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <h3>what do you need for your form</h3>
       <select
-        value={quant}
+        value={quantity}
         onChange={(e) => {
-          setquant(e.target.selectedIndex + 1);
+          setQuantity(e.target.selectedIndex + 1);
         }}
       >
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
@@ -50,9 +54,9 @@ function Form() {
       <input
         type="text"
         placeholder="item..."
-        value={desc}
+        value={description}
         onChange={(e) => {
-          setDesc(e.target.value);
+          setDesciption(e.target.value);
         }}
       />
       <button>Add</button>
@@ -60,11 +64,11 @@ function Form() {
   );
 }
 
-function PackingList() {
+function PackingList({ items }) {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((ele) => (
+        {items.map((ele) => (
           <Item item={ele} key={ele.id} />
         ))}
       </ul>
