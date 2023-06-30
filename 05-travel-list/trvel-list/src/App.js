@@ -83,7 +83,7 @@ function PackingList({ items, deleteItem, changeCkeck }) {
   if (sortBy === "description")
     sorteItems = items
       .slice()
-      .sort((a, b) => a.description.localCompare(b.description));
+      .sort((a, b) => a.description.localeCompare(b.description));
   return (
     <div className="list">
       <ul>
