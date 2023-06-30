@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { Stats } from "./Stats";
+import { Item } from "./Item";
 
 export default function App() {
   const [items, setItems] = useState([]);
   const addNewItem = (item) => setItems([...items, item]);
   const deleteItem = (id) => setItems(items.filter((item) => item.id !== id));
+  const deleteItems = () => setItems([]);
+
   const changeCkeck = (id) =>
     setItems(
       items.map((item) =>
@@ -19,6 +23,7 @@ export default function App() {
         items={items}
         deleteItem={deleteItem}
         changeCkeck={changeCkeck}
+        deletItems={deleteItems}
       />
       <Stats items={items} />
     </div>
@@ -71,7 +76,7 @@ function Form({ addNewItem }) {
   );
 }
 
-function PackingList({ items, deleteItem, changeCkeck }) {
+function PackingList({ items, deleteItem, changeCkeck, deletItems }) {
   const [sortBy, setSortBy] = useState("input");
   let sorteItems;
 
@@ -96,51 +101,15 @@ function PackingList({ items, deleteItem, changeCkeck }) {
           />
         ))}
       </ul>
-      <select onChange={(e) => setSortBy(e.target.value)}>
-        <option value={"input"}>Sort By Input order</option>
-        <option value={"description"}>Sort By description</option>
-        <option value={"packed"}>Sort By Packed</option>
-      </select>
+      <div className="actions">
+        <select onChange={(e) => setSortBy(e.target.value)}>
+          <option value={"input"}>Sort By Input order</option>
+          <option value={"description"}>Sort By description</option>
+          <option value={"packed"}>Sort By Packed</option>
+        </select>
+
+        <button onClick={deletItems}>Clear List</button>
+      </div>
     </div>
-  );
-}
-function Item({ item, deleteItem, changeCkeck }) {
-  return (
-    <li>
-      <input
-        type="checkbox"
-        value={item.packed}
-        onChange={() => changeCkeck(item.id)}
-      />
-      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
-        {item.quantity} {item.description}
-      </span>
-      <button onClick={() => deleteItem(item.id)}> ❌️ </button>
-    </li>
-  );
-}
-
-function Stats({ items }) {
-  if (!items.length)
-    return (
-      <p className="stats">
-        <em>Please Enter Some items on your list</em>
-      </p>
-    );
-
-  const length = items.length;
-  const packed = items.filter((item) => item.packed === true).length;
-  const perecentage = Math.round((packed / length) * 100);
-  return (
-    <footer className="stats">
-      {perecentage === 100 ? (
-        <em>You Have Everything You need</em>
-      ) : (
-        <em>
-          You Have {length} items on your list , and you already packed {packed}{" "}
-          ({perecentage}%)
-        </em>
-      )}
-    </footer>
   );
 }
