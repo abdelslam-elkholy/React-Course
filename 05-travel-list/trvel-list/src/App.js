@@ -14,6 +14,7 @@ export default function App() {
     <div className="app">
       <Logo />
       <Form addNewItem={addNewItem} />
+      <Counter />
       <PackingList
         items={items}
         deleteItem={deleteItem}
@@ -72,10 +73,21 @@ function Form({ addNewItem }) {
 
 function PackingList({ items, deleteItem, changeCkeck }) {
   const [sortBy, setSortBy] = useState("input");
+  let sorteItems;
+
+  if (sortBy === "input") sorteItems = items;
+
+  if (sortBy === "packed")
+    sorteItems = items.slice().sort((a, b) => a.packed - b.packed);
+
+  if (sortBy === "description")
+    sorteItems = items
+      .slice()
+      .sort((a, b) => a.description.localCompare(b.description));
   return (
     <div className="list">
       <ul>
-        {items.map((ele) => (
+        {sorteItems.map((ele) => (
           <Item
             item={ele}
             key={ele.id}
