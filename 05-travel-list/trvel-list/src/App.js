@@ -14,7 +14,7 @@ export default function App() {
     <div className="app">
       <Logo />
       <Form addNewItem={addNewItem} />
-      <Counter />
+
       <PackingList
         items={items}
         deleteItem={deleteItem}
