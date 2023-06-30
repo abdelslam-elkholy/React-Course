@@ -1,4 +1,4 @@
-export function Item({ item, deleteItem, changeCkeck }) {
+export default function Item({ item, deleteItem, changeCkeck }) {
   return (
     <li>
       <input
