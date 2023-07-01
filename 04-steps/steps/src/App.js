@@ -28,9 +28,9 @@ export default function App() {
             <div className={steps >= 2 ? "active" : ""}>2</div>
             <div className={steps >= 3 ? "active" : ""}>3</div>
           </div>
-          <p className="message">
+          <StepMessage>
             Step {steps}: {messages[steps - 1]}
-          </p>
+          </StepMessage>
           <div className="buttons">
             <Button handle={handelPrev}>Prev</Button>
             <Button handle={handelNext}>Next</Button>
@@ -41,6 +41,9 @@ export default function App() {
   );
 }
 
+function StepMessage({ children }) {
+  return <p className="message">{children}</p>;
+}
 function Button({ handle, children }) {
   return (
     <button
